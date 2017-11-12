@@ -2,4 +2,4 @@
 
 ## :shipit: UNDER CONSTRUCTION :shipit:
 
-https://github.com/tanu31195/tanu31195.github.io
+https://tanu31195.github.io
