@@ -8,7 +8,7 @@
     "complexity": "simple",
     "duration": 20,
     "id": "m1",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg/800px-Spaghetti_Bolognese_mit_Parmesan_oder_Grana_Padano.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/rice_and_curry.jpg",
     "ingredients": [
       "4 Tomatoes",
       "1 Tablespoon of Olive Oil",
@@ -30,7 +30,7 @@
       "The sauce will be done once the spaghetti are.",
       "Feel free to add some cheese on top of the finished dish."
     ],
-    "title": "Spaghetti with Tomato Sauce"
+    "title": "Rice and curry"
   },
   {
     "affordability": "affordable",
@@ -40,7 +40,7 @@
     "complexity": "simple",
     "duration": 10,
     "id": "m2",
-    "imageUrl": "https://cdn.pixabay.com/photo/2018/07/11/21/51/toast-3532016_1280.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/hoppers.jpg",
     "ingredients": [
       "1 Slice White Bread",
       "1 Slice Ham",
@@ -57,7 +57,7 @@
       "Layer ham, the pineapple and cheese on the white bread",
       "Bake the toast for round about 10 minutes in the oven at 200°C"
     ],
-    "title": "Toast Hawaii"
+    "title": "Hoppers (appa)"
   },
   {
     "affordability": "pricey",
@@ -67,7 +67,7 @@
     "complexity": "simple",
     "duration": 45,
     "id": "m3",
-    "imageUrl": "https://cdn.pixabay.com/photo/2014/10/23/18/05/burger-500054_1280.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/kottu.jpg",
     "ingredients": [
       "300g Cattle Hack",
       "1 Tomato",
@@ -87,7 +87,7 @@
       "Bruch buns with ketchup",
       "Serve burger with tomato, cucumber and onion"
     ],
-    "title": "Classic Hamburger"
+    "title": "Kottu roti"
   },
   {
     "affordability": "luxurious",
@@ -97,7 +97,7 @@
     "complexity": "challenging",
     "duration": 60,
     "id": "m4",
-    "imageUrl": "https://cdn.pixabay.com/photo/2018/03/31/19/29/schnitzel-3279045_1280.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/polos_curry.jpg",
     "ingredients": [
       "8 Veal Cutlets",
       "4 Eggs",
@@ -121,7 +121,7 @@
       "Remove, and drain on kitchen paper. Fry the parsley in the remaining oil and drain.",
       "Place the schnitzels on awarmed plate and serve garnishedwith parsley and slices of lemon."
     ],
-    "title": "Wiener Schnitzel"
+    "title": "Polos (young jackfruit) curry"
   },
   {
     "affordability": "luxurious",
@@ -133,7 +133,7 @@
     "complexity": "simple",
     "duration": 15,
     "id": "m5",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/10/25/13/29/smoked-salmon-salad-1768890_1280.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/fish_ambulthiyal.jpg",
     "ingredients": [
       "Arugula",
       "Lamb's Lettuce",
@@ -156,7 +156,7 @@
       "Prepare the salad",
       "Add salmon cubes and dressing"
     ],
-    "title": "Salad with Smoked Salmon"
+    "title": "Fish ambulthiyal"
   },
   {
     "affordability": "affordable",
@@ -167,7 +167,7 @@
     "complexity": "hard",
     "duration": 240,
     "id": "m6",
-    "imageUrl": "https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/lamprais.jpg",
     "ingredients": [
       "4 Sheets of Gelatine",
       "150ml Orange Juice",
@@ -191,7 +191,7 @@
       "Cool down again for at least 4 hours",
       "Serve with orange peel"
     ],
-    "title": "Delicious Orange Mousse"
+    "title": "Lamprais"
   },
   {
     "affordability": "affordable",
@@ -201,7 +201,7 @@
     "complexity": "simple",
     "duration": 20,
     "id": "m7",
-    "imageUrl": "https://cdn.pixabay.com/photo/2018/07/10/21/23/pancake-3529653_1280.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/wambatu_moju.jpg",
     "ingredients": [
       "1 1/2 Cups all-purpose Flour",
       "3 1/2 Teaspoons Baking Powder",
@@ -221,7 +221,7 @@
       "Heat a lightly oiled griddle or frying pan over medium high heat.",
       "Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake. Brown on both sides and serve hot."
     ],
-    "title": "Pancakes"
+    "title": "Wambatu moju"
   },
   {
     "affordability": "pricey",
@@ -231,7 +231,7 @@
     "complexity": "challenging",
     "duration": 35,
     "id": "m8",
-    "imageUrl": "https://cdn.pixabay.com/photo/2018/06/18/16/05/indian-food-3482749_1280.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/milk_rice.jpg",
     "ingredients": [
       "4 Chicken Breasts",
       "1 Onion",
@@ -253,7 +253,7 @@
       "Add coconut milk",
       "Serve with rice"
     ],
-    "title": "Creamy Indian Chicken Curry"
+    "title": "Kiribath"
   },
   {
     "affordability": "affordable",
@@ -263,7 +263,7 @@
     "complexity": "hard",
     "duration": 45,
     "id": "m9",
-    "imageUrl": "https://cdn.pixabay.com/photo/2014/08/07/21/07/souffle-412785_1280.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/pittu.jpg",
     "ingredients": [
       "1 Teaspoon melted Butter",
       "2 Tablespoons white Sugar",
@@ -301,7 +301,7 @@
       "Stop mixing after the egg white disappears. Divide mixture between 2 prepared ramekins. Place ramekins on prepared baking sheet.",
       "Bake in preheated oven until scuffles are puffed and have risen above the top of the rims, 12 to 15 minutes."
     ],
-    "title": "Chocolate Souffle"
+    "title": "Pittu"
   },
   {
     "affordability": "luxurious",
@@ -313,7 +313,7 @@
     "complexity": "simple",
     "duration": 30,
     "id": "m10",
-    "imageUrl": "https://cdn.pixabay.com/photo/2018/04/09/18/26/asparagus-3304997_1280.jpg",
+    "imageUrl": "https://tanu31195.github.io/data/react-native/traditional-meals-app/images/konda_kavum.jpg",
     "ingredients": [
       "White and Green Asparagus",
       "30g Pine Nuts",
@@ -334,6 +334,6 @@
       "Mix with asparagus, salad and dressing",
       "Serve with Baguette"
     ],
-    "title": "Asparagus Salad with Cherry Tomatoes"
+    "title": "Konda Kavum"
   }
 ]
