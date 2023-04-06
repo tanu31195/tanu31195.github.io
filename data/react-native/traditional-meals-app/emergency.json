@@ -1,42 +1,42 @@
 [
   {
     "id": "1",
-    "icon": "medical-outline",
+    "icon": "medical",
     "text": "Emergency services (police, fire, ambulance)",
     "url": "tel:+119",
     "urlText": "119"
   },
   {
     "id": "2",
-    "icon": "mail-outline",
+    "icon": "call",
     "text": "Tourist Police",
     "url": "tel:+94115336699",
     "urlText": "+94 11 533 6699"
   },
   {
     "id": "3",
-    "icon": "mail-outline",
+    "icon": "globe",
     "text": "Sri Lanka Tourism Development Authority (SLTDA)",
     "url": "tel:+94112384111",
     "urlText": "+94 11 238 4111"
   },
   {
     "id": "4",
-    "icon": "medical-outline",
+    "icon": "medical",
     "text": "National Hospital of Sri Lanka (Colombo)",
     "url": "tel:+94112691111",
     "urlText": "+94 11 269 1111"
   },
   {
     "id": "5",
-    "icon": "mail-outline",
+    "icon": "business",
     "text": "Tourist Complaints Bureau",
     "url": "tel:+94112384111",
     "urlText": "+94 11 238 4111"
   },
   {
     "id": "6",
-    "icon": "mail-outline",
+    "icon": "business",
     "text": "Ministry of Foreign Affairs",
     "url": "tel:+94115316000",
     "urlText": "+94 11 531 6000"
