@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "icon": "at-outline",
+    "text": "Please visit my Website",
+    "url": "https://tanu31195.github.io"
+  },
+  {
+    "id": "2",
+    "icon": "mail-outline",
+    "text": "Please email me ",
+    "url": "tanushkabandara@gmail.com"
+  }
+]
