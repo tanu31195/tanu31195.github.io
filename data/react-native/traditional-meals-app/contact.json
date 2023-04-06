@@ -2,14 +2,14 @@
   {
     "id": "1",
     "icon": "globe-outline",
-    "text": "Please visit my Website",
+    "text": "Visit my Website",
     "url": "https://tanu31195.github.io",
     "urlText": "https://tanu31195.github.io"
   },
   {
     "id": "2",
     "icon": "mail-outline",
-    "text": "Please email me ",
+    "text": "Contact me @",
     "url": "mailto: tanushkabandara@gmail.com",
     "urlText": "tanushkabandara@gmail.com"
   }
