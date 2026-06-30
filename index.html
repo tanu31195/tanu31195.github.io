@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <!-- Prevent flash of wrong theme -->
-    <script>(function(){var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);})()</script>
+    <script>(function(){var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);})()</script>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109483817-1"></script>
@@ -24,14 +24,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png" />
     <link rel="manifest" href="favicons/manifest.json" />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" content="#060907" />
 
-    <title>Tanushka Bandara — Software Engineer</title>
+    <title>Tanushka Bandara — Lead Developer &amp; Software Engineer</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -42,6 +42,11 @@
   </head>
 
   <body id="page-top">
+
+    <!-- ===================== ANIMATED BACKGROUND ===================== -->
+    <div class="bg-layer bg-grid" aria-hidden="true"></div>
+    <div class="bg-layer bg-glow" aria-hidden="true"></div>
+    <div class="bg-layer bg-scan" aria-hidden="true"></div>
 
     <!-- ===================== SIDEBAR NAV ===================== -->
     <nav id="sideNav" aria-label="Main navigation">
@@ -143,24 +148,44 @@
            ====================================================== -->
       <section class="resume-section" id="about">
         <div class="section-inner">
-          <h1 class="hero-name">
+          <span class="hero-eyebrow reveal">
+            <span class="dot"></span> Available for impactful work
+          </span>
+          <h1 class="hero-name reveal">
             <span class="first">Tanushka</span>
-            <span class="last text-gradient">Bandara</span>
+            <span class="last" data-text="Bandara">Bandara</span>
           </h1>
-          <div class="hero-location">
+          <div class="hero-typed-line reveal">
+            <span class="prompt">&gt;</span><span class="typed" id="typed"></span><span class="caret">_</span>
+          </div>
+          <div class="hero-location reveal">
             <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
             Colombo, Sri Lanka
           </div>
-          <div class="hero-role">
+          <div class="hero-role reveal">
             Lead Developer, Software Engineering at
             <a href="https://hostalky.com/" target="_blank" rel="noopener">HosTalky</a>
           </div>
-          <p class="hero-bio">
+          <p class="hero-bio reveal">
             Passionate software engineer with 8+ years of experience building
             scalable web and mobile applications. Specialised in React Native,
             TypeScript, iOS development, and cloud-native solutions.
           </p>
-          <div class="hero-actions">
+          <div class="hero-stats reveal">
+            <div class="stat">
+              <div class="stat-num">8<span>+</span></div>
+              <div class="stat-label">Years Building</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">7</div>
+              <div class="stat-label">Roles Held</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">4<span>+</span></div>
+              <div class="stat-label">Apps Shipped</div>
+            </div>
+          </div>
+          <div class="hero-actions reveal">
             <a href="mailto:tanushkabandara@gmail.com" class="btn btn-primary">
               <i class="fas fa-envelope" aria-hidden="true"></i> Get In Touch
             </a>
@@ -168,7 +193,7 @@
               <i class="fas fa-download" aria-hidden="true"></i> Download CV
             </a>
           </div>
-          <div class="about-social">
+          <div class="about-social reveal">
             <a href="https://www.linkedin.com/in/tanushka-bandara" target="_blank" rel="noopener" aria-label="LinkedIn">
               <i class="fab fa-linkedin-in"></i>
             </a>
@@ -191,7 +216,10 @@
            ====================================================== -->
       <section class="resume-section" id="experience">
         <div class="section-inner">
-          <h2 class="section-title">Experience</h2>
+          <div class="section-head reveal">
+            <span class="section-index">01</span>
+            <h2 class="section-title">Experience</h2>
+          </div>
           <div class="timeline">
 
             <div class="timeline-item">
@@ -316,7 +344,10 @@
            ====================================================== -->
       <section class="resume-section" id="education">
         <div class="section-inner">
-          <h2 class="section-title">Education</h2>
+          <div class="section-head reveal">
+            <span class="section-index">02</span>
+            <h2 class="section-title">Education</h2>
+          </div>
           <div class="timeline">
 
             <div class="timeline-item">
@@ -360,9 +391,14 @@
            ====================================================== -->
       <section class="resume-section" id="skills">
         <div class="section-inner">
-          <h2 class="section-title">Skills</h2>
+          <div class="section-head reveal">
+            <span class="section-index">03</span>
+            <h2 class="section-title">Skills</h2>
+          </div>
 
-          <div class="skills-category">
+          <div class="skills-bento">
+
+          <div class="bento bento--wide reveal">
             <h3 class="skills-heading">Languages &amp; Frameworks</h3>
             <div class="skill-icons">
               <div class="skill-icon-item">
@@ -404,7 +440,7 @@
             </div>
           </div>
 
-          <div class="skills-category">
+          <div class="bento bento--narrow reveal">
             <h3 class="skills-heading">Tools &amp; Platforms</h3>
             <div class="skill-icons">
               <div class="skill-icon-item">
@@ -446,7 +482,7 @@
             </div>
           </div>
 
-          <div class="skills-category">
+          <div class="bento bento--full reveal">
             <h3 class="skills-heading">Practices</h3>
             <div class="skill-tags">
               <span class="skill-tag">Agile / Scrum</span>
@@ -460,6 +496,7 @@
             </div>
           </div>
 
+          </div>
         </div>
       </section>
 
@@ -469,11 +506,14 @@
            ====================================================== -->
       <section class="resume-section" id="projects">
         <div class="section-inner">
-          <h2 class="section-title">Projects</h2>
+          <div class="section-head reveal">
+            <span class="section-index">04</span>
+            <h2 class="section-title">Projects</h2>
+          </div>
           <div class="projects-grid">
 
             <!-- CoachDesk HQ -->
-            <div class="project-card">
+            <div class="project-card reveal">
               <div class="project-icon">
                 <i class="fas fa-dumbbell" aria-hidden="true"></i>
               </div>
@@ -499,7 +539,7 @@
             </div>
 
             <!-- Traditional Sri Lankan Meals -->
-            <div class="project-card">
+            <div class="project-card reveal">
               <div class="project-icon">
                 <i class="fas fa-utensils" aria-hidden="true"></i>
               </div>
@@ -525,7 +565,7 @@
             </div>
 
             <!-- Meals App -->
-            <div class="project-card">
+            <div class="project-card reveal">
               <div class="project-icon">
                 <i class="fas fa-book-open" aria-hidden="true"></i>
               </div>
@@ -551,7 +591,7 @@
             </div>
 
             <!-- GitHub profile -->
-            <div class="project-card project-card--github">
+            <div class="project-card project-card--github reveal">
               <div class="project-icon project-icon--github">
                 <i class="fab fa-github" aria-hidden="true"></i>
               </div>
@@ -582,10 +622,13 @@
            ====================================================== -->
       <section class="resume-section" id="awards">
         <div class="section-inner">
-          <h2 class="section-title">Awards &amp; Certifications</h2>
+          <div class="section-head reveal">
+            <span class="section-index">05</span>
+            <h2 class="section-title">Awards &amp; Certifications</h2>
+          </div>
           <div class="awards-list">
 
-            <div class="award-item">
+            <div class="award-item reveal">
               <div class="award-icon">
                 <i class="fas fa-certificate" aria-hidden="true"></i>
               </div>
@@ -613,10 +656,13 @@
            ====================================================== -->
       <section class="resume-section" id="interests">
         <div class="section-inner">
-          <h2 class="section-title">Interests</h2>
+          <div class="section-head reveal">
+            <span class="section-index">06</span>
+            <h2 class="section-title">Interests</h2>
+          </div>
           <div class="interests-grid">
 
-            <div class="interests-group">
+            <div class="interests-group reveal">
               <h3 class="interests-heading">Technology</h3>
               <div class="interest-tags">
                 <span><i class="fas fa-mobile-alt" aria-hidden="true"></i> iOS Development</span>
@@ -627,7 +673,7 @@
               </div>
             </div>
 
-            <div class="interests-group">
+            <div class="interests-group reveal">
               <h3 class="interests-heading">Personal</h3>
               <div class="interest-tags">
                 <span><i class="fas fa-paw" aria-hidden="true"></i> Animal Welfare</span>

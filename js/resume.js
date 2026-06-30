@@ -1,28 +1,29 @@
 (function () {
   'use strict';
 
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ──────────────────────────────────────────
      Dark / light mode
   ────────────────────────────────────────── */
-  const html        = document.documentElement;
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon   = document.getElementById('themeIcon');
-  const themeLabel  = document.getElementById('themeLabel');
+  var html        = document.documentElement;
+  var themeToggle = document.getElementById('themeToggle');
+  var themeIcon   = document.getElementById('themeIcon');
+  var themeLabel  = document.getElementById('themeLabel');
 
   function applyTheme(theme) {
     html.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     if (theme === 'dark') {
-      themeIcon.className  = 'fas fa-sun';
+      themeIcon.className = 'fas fa-sun';
       themeLabel.textContent = 'Light Mode';
     } else {
-      themeIcon.className  = 'fas fa-moon';
+      themeIcon.className = 'fas fa-moon';
       themeLabel.textContent = 'Dark Mode';
     }
   }
 
-  // Sync button state with whatever theme was set by the anti-FOUC script
-  applyTheme(html.getAttribute('data-theme') || 'light');
+  applyTheme(html.getAttribute('data-theme') || 'dark');
 
   themeToggle.addEventListener('click', function () {
     applyTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
@@ -32,8 +33,8 @@
   /* ──────────────────────────────────────────
      Mobile nav toggle
   ────────────────────────────────────────── */
-  const navToggle = document.getElementById('navToggle');
-  const sidebarNav = document.getElementById('sidebarNav');
+  var navToggle  = document.getElementById('navToggle');
+  var sidebarNav = document.getElementById('sidebarNav');
 
   navToggle.addEventListener('click', function () {
     var open = sidebarNav.classList.toggle('open');
@@ -41,7 +42,6 @@
     navToggle.setAttribute('aria-expanded', String(open));
   });
 
-  // Close mobile nav when any nav link is clicked
   document.querySelectorAll('#sidebarNav .nav-link').forEach(function (link) {
     link.addEventListener('click', function () {
       sidebarNav.classList.remove('open');
@@ -56,22 +56,100 @@
   ────────────────────────────────────────── */
   var navLinks = document.querySelectorAll('#sidebarNav .nav-link');
 
-  var observer = new IntersectionObserver(function (entries) {
+  var spy = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
         navLinks.forEach(function (link) {
-          var active = link.getAttribute('href') === '#' + entry.target.id;
-          link.classList.toggle('active', active);
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
         });
       }
     });
-  }, {
-    rootMargin: '-35% 0px -55% 0px',
-    threshold: 0
-  });
+  }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
 
   document.querySelectorAll('section[id]').forEach(function (section) {
-    observer.observe(section);
+    spy.observe(section);
   });
+
+
+  /* ──────────────────────────────────────────
+     Typing rotator
+  ────────────────────────────────────────── */
+  var typed = document.getElementById('typed');
+  if (typed) {
+    var phrases = [
+      ' Lead Developer @ HosTalky',
+      ' React Native Engineer',
+      ' Full-Stack Developer',
+      ' iOS / Swift Developer',
+      ' TypeScript Enthusiast'
+    ];
+
+    if (prefersReduced) {
+      typed.textContent = phrases[0];
+    } else {
+      var pi = 0, ci = 0, deleting = false;
+
+      function tick() {
+        var word = phrases[pi];
+        typed.textContent = word.substring(0, ci);
+
+        if (!deleting && ci < word.length) {
+          ci++;
+          setTimeout(tick, 65);
+        } else if (!deleting && ci === word.length) {
+          deleting = true;
+          setTimeout(tick, 1800);
+        } else if (deleting && ci > 0) {
+          ci--;
+          setTimeout(tick, 30);
+        } else {
+          deleting = false;
+          pi = (pi + 1) % phrases.length;
+          setTimeout(tick, 350);
+        }
+      }
+      tick();
+    }
+  }
+
+
+  /* ──────────────────────────────────────────
+     Scroll reveal
+  ────────────────────────────────────────── */
+  // Auto-tag timeline items so they reveal too
+  document.querySelectorAll('.timeline-item').forEach(function (el) {
+    el.classList.add('reveal');
+  });
+
+  var revealEls = document.querySelectorAll('.reveal');
+
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('in-view'); });
+  } else {
+    var revealObs = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+    revealEls.forEach(function (el) { revealObs.observe(el); });
+  }
+
+
+  /* ──────────────────────────────────────────
+     Bento / pointer glow tracking
+  ────────────────────────────────────────── */
+  if (!prefersReduced) {
+    document.querySelectorAll('.bento').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+      });
+    });
+  }
 
 })();
