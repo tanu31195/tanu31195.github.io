@@ -6,11 +6,13 @@
   --nav-height: 56px;
 
   /* Brand colours */
-  --color-primary:       #6366f1;
-  --color-primary-dark:  #4f46e5;
-  --color-primary-light: #818cf8;
-  --color-accent:        #14b8a6;
-  --color-accent-dark:   #0d9488;
+  --color-primary:       #7bc639;
+  --color-primary-dark:  #5fa12c;
+  --color-primary-light: #9bdb5f;
+  --color-primary-rgb:   123, 198, 57;
+  --color-accent:        #51fc00;
+  --color-accent-dark:   #3ecc00;
+  --color-accent-rgb:    81, 252, 0;
 
   /* Sidebar */
   --sidebar-bg:          #0f172a;
@@ -160,14 +162,14 @@ a:hover { color: var(--color-accent); }
   height: 8rem;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid rgba(99,102,241,.45);
-  box-shadow: 0 0 0 5px rgba(99,102,241,.12);
+  border: 3px solid rgba(var(--color-primary-rgb),.45);
+  box-shadow: 0 0 0 5px rgba(var(--color-primary-rgb),.12);
   transition: border-color var(--duration) var(--ease),
               box-shadow   var(--duration) var(--ease);
 }
 .profile-link:hover .img-profile {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 5px rgba(99,102,241,.25);
+  box-shadow: 0 0 0 5px rgba(var(--color-primary-rgb),.25);
 }
 
 .sidebar-name { margin-bottom: 0.2rem; }
@@ -277,7 +279,7 @@ a:hover { color: var(--color-accent); }
 }
 .sidebar-nav .nav-link.active {
   color: var(--sidebar-text-active);
-  background: rgba(99,102,241,.15);
+  background: rgba(var(--color-primary-rgb),.15);
   border-left-color: var(--color-primary);
 }
 
@@ -471,7 +473,7 @@ a:hover { color: var(--color-accent); }
 .about-social a:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  background: rgba(99,102,241,.06);
+  background: rgba(var(--color-primary-rgb),.06);
   transform: translateY(-2px);
 }
 
@@ -505,7 +507,7 @@ a:hover { color: var(--color-accent); }
   background: var(--color-primary-dark);
   color: #fff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(99,102,241,.38);
+  box-shadow: 0 4px 14px rgba(var(--color-primary-rgb),.38);
 }
 .btn-outline {
   background: transparent;
@@ -515,7 +517,7 @@ a:hover { color: var(--color-accent); }
 .btn-outline:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  background: rgba(99,102,241,.05);
+  background: rgba(var(--color-primary-rgb),.05);
 }
 .btn-sm {
   padding: 0.4rem 0.85rem;
@@ -580,7 +582,7 @@ a:hover { color: var(--color-accent); }
 }
 .timeline-content:hover {
   box-shadow: var(--shadow-md);
-  border-color: rgba(99,102,241,.2);
+  border-color: rgba(var(--color-primary-rgb),.2);
   transform: translateY(-1px);
 }
 
@@ -692,7 +694,7 @@ a:hover { color: var(--color-accent); }
 .skill-tag:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
-  background: rgba(99,102,241,.04);
+  background: rgba(var(--color-primary-rgb),.04);
 }
 
 
@@ -735,7 +737,7 @@ a:hover { color: var(--color-accent); }
 }
 .project-card:hover {
   box-shadow: var(--shadow-lg);
-  border-color: rgba(99,102,241,.22);
+  border-color: rgba(var(--color-primary-rgb),.22);
   transform: translateY(-3px);
 }
 .project-card:hover::before { opacity: 1; }
@@ -747,8 +749,8 @@ a:hover { color: var(--color-accent); }
   height: 44px;
   border-radius: var(--radius-sm);
   background: linear-gradient(135deg,
-    rgba(99,102,241,.1),
-    rgba(20,184,166,.1));
+    rgba(var(--color-primary-rgb),.1),
+    rgba(var(--color-accent-rgb),.1));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -778,7 +780,7 @@ a:hover { color: var(--color-accent); }
   gap: 0.35rem;
 }
 .project-tags span {
-  background: rgba(99,102,241,.08);
+  background: rgba(var(--color-primary-rgb),.08);
   color: var(--color-primary);
   padding: 0.18rem 0.55rem;
   border-radius: 4px;
@@ -788,7 +790,7 @@ a:hover { color: var(--color-accent); }
   transition: background var(--duration) var(--ease);
 }
 [data-theme="dark"] .project-tags span {
-  background: rgba(99,102,241,.18);
+  background: rgba(var(--color-primary-rgb),.18);
 }
 
 .project-links {
@@ -824,7 +826,7 @@ a:hover { color: var(--color-accent); }
 }
 .award-item:hover {
   box-shadow: var(--shadow-md);
-  border-color: rgba(99,102,241,.2);
+  border-color: rgba(var(--color-primary-rgb),.2);
   transform: translateY(-1px);
 }
 
@@ -909,7 +911,7 @@ a:hover { color: var(--color-accent); }
 .interest-tags span:hover {
   border-color: var(--color-accent);
   color: var(--color-accent-dark);
-  background: rgba(20,184,166,.05);
+  background: rgba(var(--color-accent-rgb),.05);
   transform: translateY(-1px);
 }
 .interest-tags i { font-size: 0.72rem; }
