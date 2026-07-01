@@ -140,6 +140,25 @@
 
 
   /* ──────────────────────────────────────────
+     Live duration for the current ("Present") role
+  ────────────────────────────────────────── */
+  function fmtDuration(months) {
+    var y = Math.floor(months / 12), m = months % 12, out = [];
+    if (y) out.push(y + (y === 1 ? ' yr' : ' yrs'));
+    if (m) out.push(m + (m === 1 ? ' mo' : ' mos'));
+    return out.join(' ') || '0 mos';
+  }
+  document.querySelectorAll('.timeline-dur[data-start]').forEach(function (el) {
+    var parts = (el.getAttribute('data-start') || '').split('-');
+    if (parts.length !== 2) return;
+    var sy = +parts[0], sm = +parts[1], now = new Date();
+    // Inclusive of both the start and current month (LinkedIn style)
+    var months = (now.getFullYear() - sy) * 12 + (now.getMonth() + 1 - sm) + 1;
+    if (months > 0) el.textContent = fmtDuration(months);
+  });
+
+
+  /* ──────────────────────────────────────────
      Bento / pointer glow tracking
   ────────────────────────────────────────── */
   if (!prefersReduced) {
