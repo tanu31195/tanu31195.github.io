@@ -267,17 +267,27 @@
     matrixCanvas.classList.remove('on');
   }
 
+  var CHARS = 'アイウエオカキクケコサシスセソタチツテト01<>{}=/+*#$';
+  var fs = 16, drops = [];
+
+  function matrixResize() {
+    if (!matrixCanvas) return;
+    // Match the drawing buffer to the element's real rendered size (handles
+    // mobile viewport / URL-bar quirks better than window.innerHeight).
+    var w = matrixCanvas.clientWidth || window.innerWidth;
+    var h = matrixCanvas.clientHeight || window.innerHeight;
+    matrixCanvas.width = w;
+    matrixCanvas.height = h;
+    var cols = Math.ceil(w / fs);
+    drops = [];
+    for (var i = 0; i < cols; i++) drops.push(Math.floor(Math.random() * (h / fs)));
+  }
+
   function matrixStart() {
     if (prefersReduced || !matrixCanvas || matrixTimer) return;
     var ctx = matrixCanvas.getContext('2d');
-    matrixCanvas.width = window.innerWidth;
-    matrixCanvas.height = window.innerHeight;
-    var fs = 16;
-    var cols = Math.floor(matrixCanvas.width / fs);
-    var drops = Array(cols).fill(1);
-    var CHARS = 'アイウエオカキクケコサシスセソタチツテト01<>{}=/+*#$';
-
     matrixCanvas.classList.add('on');
+    matrixResize();
     ctx.fillStyle = 'rgba(3, 8, 4, 1)';
     ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
 
@@ -295,7 +305,11 @@
     }, 50);
   }
 
-  if (matrixCanvas) matrixCanvas.addEventListener('click', matrixStop);
+  if (matrixCanvas) {
+    matrixCanvas.addEventListener('click', matrixStop);
+    window.addEventListener('resize', function () { if (matrixTimer) matrixResize(); });
+    window.addEventListener('orientationchange', function () { if (matrixTimer) setTimeout(matrixResize, 200); });
+  }
 
   // Konami code → matrix rain
   var KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
