@@ -171,4 +171,299 @@
     });
   }
 
+
+  /* ──────────────────────────────────────────
+     Cursor spotlight
+  ────────────────────────────────────────── */
+  var glow = document.getElementById('cursorGlow');
+  var fancyPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (glow && fancyPointer && !prefersReduced) {
+    var glowRaf = null;
+    document.addEventListener('pointermove', function (e) {
+      if (glowRaf) return;
+      glowRaf = requestAnimationFrame(function () {
+        glow.style.background =
+          'radial-gradient(560px at ' + e.clientX + 'px ' + e.clientY + 'px, rgba(81,252,0,0.055), transparent 65%)';
+        glow.classList.add('on');
+        glowRaf = null;
+      });
+    });
+  }
+
+
+  /* ──────────────────────────────────────────
+     3D tilt on project cards
+  ────────────────────────────────────────── */
+  if (fancyPointer && !prefersReduced) {
+    document.querySelectorAll('.project-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var rx = ((e.clientY - r.top) / r.height - 0.5) * -7;
+        var ry = ((e.clientX - r.left) / r.width - 0.5) * 7;
+        card.classList.add('tilting');
+        card.style.transform =
+          'perspective(800px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-6px)';
+      });
+      card.addEventListener('pointerleave', function () {
+        card.classList.remove('tilting');
+        card.style.transform = '';
+      });
+    });
+  }
+
+
+  /* ──────────────────────────────────────────
+     Section title scramble decode
+  ────────────────────────────────────────── */
+  var GLYPHS = '!<>-_\\/[]{}=+*^?#@$%&';
+
+  function scramble(el) {
+    if (prefersReduced || el.dataset.decoded) return;
+    el.dataset.decoded = '1';
+    var target = el.textContent;
+    var frame = 0;
+    var total = Math.max(18, target.length * 3);
+    el.classList.add('decoding');
+
+    (function step() {
+      var out = '';
+      for (var i = 0; i < target.length; i++) {
+        var reveal = (frame / total) * target.length * 1.4;
+        if (i < reveal) out += target[i];
+        else if (target[i] === ' ') out += ' ';
+        else out += GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      }
+      el.textContent = out;
+      frame++;
+      if (out !== target) requestAnimationFrame(step);
+      else el.classList.remove('decoding');
+    })();
+  }
+
+  if ('IntersectionObserver' in window) {
+    var scrambleObs = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          scramble(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.section-title').forEach(function (el) { scrambleObs.observe(el); });
+  }
+
+
+  /* ──────────────────────────────────────────
+     Matrix rain
+  ────────────────────────────────────────── */
+  var matrixCanvas = document.getElementById('matrixCanvas');
+  var matrixTimer = null;
+
+  function matrixStop() {
+    if (!matrixTimer) return;
+    clearInterval(matrixTimer);
+    matrixTimer = null;
+    matrixCanvas.classList.remove('on');
+  }
+
+  function matrixStart() {
+    if (prefersReduced || !matrixCanvas || matrixTimer) return;
+    var ctx = matrixCanvas.getContext('2d');
+    matrixCanvas.width = window.innerWidth;
+    matrixCanvas.height = window.innerHeight;
+    var fs = 16;
+    var cols = Math.floor(matrixCanvas.width / fs);
+    var drops = Array(cols).fill(1);
+    var CHARS = 'アイウエオカキクケコサシスセソタチツテト01<>{}=/+*#$';
+
+    matrixCanvas.classList.add('on');
+    ctx.fillStyle = 'rgba(3, 8, 4, 1)';
+    ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+    matrixTimer = setInterval(function () {
+      ctx.fillStyle = 'rgba(3, 8, 4, 0.08)';
+      ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+      ctx.font = fs + 'px monospace';
+      for (var i = 0; i < drops.length; i++) {
+        var ch = CHARS[Math.floor(Math.random() * CHARS.length)];
+        ctx.fillStyle = Math.random() > 0.975 ? '#9be85a' : '#2f7a12';
+        ctx.fillText(ch, i * fs, drops[i] * fs);
+        if (drops[i] * fs > matrixCanvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }, 50);
+  }
+
+  if (matrixCanvas) matrixCanvas.addEventListener('click', matrixStop);
+
+  // Konami code → matrix rain
+  var KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  var kIdx = 0;
+  document.addEventListener('keydown', function (e) {
+    kIdx = (e.key === KONAMI[kIdx]) ? kIdx + 1 : (e.key === KONAMI[0] ? 1 : 0);
+    if (kIdx === KONAMI.length) { kIdx = 0; matrixStart(); }
+  });
+
+
+  /* ──────────────────────────────────────────
+     Interactive terminal
+  ────────────────────────────────────────── */
+  var term      = document.getElementById('terminal');
+  var termOut   = document.getElementById('termOut');
+  var termInput = document.getElementById('termInput');
+  var termHint  = document.getElementById('termHint');
+  var termClose = document.getElementById('termClose');
+  var termHistory = [];
+  var termHistIdx = -1;
+  var termBooted = false;
+
+  function tPrint(html, cls) {
+    var div = document.createElement('div');
+    if (cls) div.className = cls;
+    div.innerHTML = html;
+    termOut.appendChild(div);
+    termOut.scrollTop = termOut.scrollHeight;
+  }
+
+  function esc(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  var COMMANDS = {
+    help: function () {
+      tPrint('<span class="t-head">Available commands</span>\n' +
+        '  <span class="t-hi">whoami</span>      who is this guy\n' +
+        '  <span class="t-hi">experience</span>  work history\n' +
+        '  <span class="t-hi">skills</span>      tech stack\n' +
+        '  <span class="t-hi">projects</span>    things I built\n' +
+        '  <span class="t-hi">contact</span>     get in touch\n' +
+        '  <span class="t-hi">cv</span>          download my resume\n' +
+        '  <span class="t-hi">theme</span>       toggle light/dark\n' +
+        '  <span class="t-hi">matrix</span>      follow the white rabbit\n' +
+        '  <span class="t-hi">clear</span>       clear the screen\n' +
+        '  <span class="t-hi">exit</span>        close terminal');
+    },
+    whoami: function () {
+      tPrint('<span class="t-head">Tanushka Bandara</span> — Lead Developer, Software Engineering @ HosTalky\n' +
+        '<span class="t-dim">Colombo, Sri Lanka · 8+ years building web &amp; mobile apps</span>\n' +
+        'React Native · TypeScript · iOS · cloud-native solutions');
+    },
+    experience: function () {
+      tPrint('<span class="t-hi">2024—now </span> Lead Developer, Software Engineering · HosTalky\n' +
+        '<span class="t-hi">2023—2024</span> Senior Software Engineer · Xinfinit\n' +
+        '<span class="t-hi">2021—2023</span> Software Engineer → Senior · Mitra Innovation\n' +
+        '<span class="t-hi">2018—2021</span> Trainee → Associate → Software Engineer · CodeGen\n' +
+        '<span class="t-dim">type</span> <span class="t-hi">exit</span> <span class="t-dim">and scroll to Experience for the full timeline</span>');
+    },
+    skills: function () {
+      tPrint('<span class="t-head">Languages</span>   JavaScript · TypeScript · Swift · Java\n' +
+        '<span class="t-head">Frameworks</span>  React Native · React · Node.js\n' +
+        '<span class="t-head">Platforms</span>   iOS · Android · Firebase · GCP · Docker · MySQL\n' +
+        '<span class="t-head">Practices</span>   Agile · Design Patterns · REST · CI/CD');
+    },
+    projects: function () {
+      tPrint('<span class="t-head">CoachDesk HQ</span> — gym management app (React Native · iOS)\n' +
+        '  <a href="https://apps.apple.com/us/app/coachdesk-hq/id6761045494" target="_blank" rel="noopener">App Store ↗</a>\n' +
+        '<span class="t-head">More</span> — open-source work &amp; experiments\n' +
+        '  <a href="https://github.com/tanu31195" target="_blank" rel="noopener">github.com/tanu31195 ↗</a>');
+    },
+    contact: function () {
+      tPrint('email     <a href="mailto:tanushkabandara@gmail.com">tanushkabandara@gmail.com</a>\n' +
+        'linkedin  <a href="https://www.linkedin.com/in/tanushka-bandara" target="_blank" rel="noopener">in/tanushka-bandara ↗</a>\n' +
+        'github    <a href="https://github.com/tanu31195" target="_blank" rel="noopener">tanu31195 ↗</a>');
+    },
+    cv: function () {
+      tPrint('<span class="t-dim">opening resume…</span>');
+      window.open('img/Resume.pdf', '_blank');
+    },
+    theme: function () {
+      themeToggle.click();
+      tPrint('<span class="t-dim">theme switched to ' + html.getAttribute('data-theme') + '</span>');
+    },
+    matrix: function () {
+      tPrint('<span class="t-hi">wake up, neo…</span> <span class="t-dim">(click anywhere to exit)</span>');
+      setTimeout(function () { termHide(); matrixStart(); }, 600);
+    },
+    clear: function () { termOut.innerHTML = ''; },
+    exit: function () { termHide(); },
+    sudo: function (args) {
+      if (args === 'hire') {
+        tPrint('<span class="t-hi">✔ permission granted.</span> <a href="mailto:tanushkabandara@gmail.com">tanushkabandara@gmail.com</a> — let’s talk.');
+      } else {
+        tPrint('<span class="t-dim">user is not in the sudoers file. this incident will be reported.</span>');
+      }
+    }
+  };
+  COMMANDS.resume = COMMANDS.cv;
+  COMMANDS.work = COMMANDS.experience;
+  COMMANDS.about = COMMANDS.whoami;
+  COMMANDS.email = COMMANDS.contact;
+  COMMANDS.ls = function () { tPrint('about  experience  skills  projects  contact  cv'); };
+
+  function termRun(raw) {
+    var line = raw.trim();
+    tPrint('<span class="t-dim">❯</span> <span class="t-cmd">' + esc(line) + '</span>');
+    if (!line) return;
+    termHistory.push(line);
+    termHistIdx = termHistory.length;
+    var parts = line.split(/\s+/);
+    var cmd = parts[0].toLowerCase();
+    var args = parts.slice(1).join(' ');
+    if (COMMANDS[cmd]) COMMANDS[cmd](args);
+    else tPrint('<span class="t-dim">command not found: ' + esc(cmd) + ' — try</span> <span class="t-hi">help</span>');
+  }
+
+  function termShow() {
+    term.hidden = false;
+    if (!termBooted) {
+      termBooted = true;
+      tPrint('<span class="t-dim">[ok] portfolio shell v2.0 — connected as</span> <span class="t-hi">guest</span>');
+      tPrint('<span class="t-dim">type</span> <span class="t-hi">help</span> <span class="t-dim">to get started</span>');
+    }
+    setTimeout(function () { termInput.focus(); }, 50);
+  }
+
+  function termHide() {
+    term.hidden = true;
+    termHint.focus();
+  }
+
+  termHint.addEventListener('click', termShow);
+  termClose.addEventListener('click', termHide);
+  term.addEventListener('click', function (e) { if (e.target === term) termHide(); });
+
+  termInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+      termRun(termInput.value);
+      termInput.value = '';
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (termHistIdx > 0) termInput.value = termHistory[--termHistIdx] || '';
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (termHistIdx < termHistory.length) termInput.value = termHistory[++termHistIdx] || '';
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    var typing = /^(input|textarea|select)$/i.test((e.target.tagName || ''));
+    if (e.key === '/' && !typing && term.hidden) {
+      e.preventDefault();
+      termShow();
+    } else if (e.key === 'Escape') {
+      if (!term.hidden) termHide();
+      matrixStop();
+    }
+  });
+
+
+  /* ──────────────────────────────────────────
+     Tab-away title
+  ────────────────────────────────────────── */
+  var realTitle = document.title;
+  document.addEventListener('visibilitychange', function () {
+    document.title = document.hidden ? '⚠ connection idle — tanushka@portfolio' : realTitle;
+  });
+
 })();

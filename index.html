@@ -47,6 +47,8 @@
     <div class="bg-layer bg-grid" aria-hidden="true"></div>
     <div class="bg-layer bg-glow" aria-hidden="true"></div>
     <div class="bg-layer bg-scan" aria-hidden="true"></div>
+    <div id="cursorGlow" aria-hidden="true"></div>
+    <canvas id="matrixCanvas" aria-hidden="true"></canvas>
 
     <!-- ===================== SIDEBAR NAV ===================== -->
     <nav id="sideNav" aria-label="Main navigation">
@@ -134,6 +136,10 @@
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle colour theme">
           <i class="fas fa-moon" id="themeIcon" aria-hidden="true"></i>
           <span id="themeLabel">Dark Mode</span>
+        </button>
+        <button class="term-hint" id="termHint" aria-label="Open interactive terminal">
+          <span class="term-hint-label">&gt;_ terminal</span>
+          <kbd>/</kbd>
         </button>
       </div>
 
@@ -653,6 +659,25 @@
       </section>
 
     </main>
+
+    <!-- ===================== INTERACTIVE TERMINAL ===================== -->
+    <div id="terminal" class="term" role="dialog" aria-label="Interactive terminal" hidden>
+      <div class="term-window">
+        <div class="term-bar">
+          <span class="term-dot red"></span>
+          <span class="term-dot yellow"></span>
+          <span class="term-dot green"></span>
+          <span class="term-title">tanushka@portfolio: ~</span>
+          <button class="term-close" id="termClose" aria-label="Close terminal">&times;</button>
+        </div>
+        <div class="term-out" id="termOut" aria-live="polite"></div>
+        <div class="term-input-row">
+          <span class="term-prompt">&#10095;</span>
+          <input type="text" id="termInput" autocomplete="off" autocapitalize="off"
+                 spellcheck="false" aria-label="Terminal command input" />
+        </div>
+      </div>
+    </div>
 
     <script src="js/resume.js"></script>
   </body>
