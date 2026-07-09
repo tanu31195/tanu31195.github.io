@@ -154,6 +154,29 @@
     .band p { margin-bottom: 14px; }
     .band p strong { color: var(--text-bright); }
 
+    .shots {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .shots img {
+      width: 220px;
+      max-width: 62vw;
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      border-radius: 18px;
+      border: 1px solid var(--graphite-800);
+      display: block;
+    }
+    .shots-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
     footer {
       text-align: center;
       padding: 32px 24px 40px;
@@ -179,6 +202,22 @@
 </header>
 
 <main>
+
+  <div class="section">
+    <h2>See It in Action</h2>
+    <div class="shots">
+      <img src="screenshots/1-dashboard.png" alt="Dashboard — today's attendance, monthly earnings and weekly trend" />
+      <img src="screenshots/2-mark-attendance.png" alt="Mark attendance with one tap per member" loading="lazy" />
+      <img src="screenshots/3-members.png" alt="Members list with paid and unpaid balance badges" loading="lazy" />
+      <img src="screenshots/4-invoices.png" alt="PDF invoice generated from a logged payment" loading="lazy" />
+      <img src="screenshots/5-send-reminders.png" alt="One-tap WhatsApp payment reminder" loading="lazy" />
+      <img src="screenshots/6-reports.png" alt="Revenue and attendance reports" loading="lazy" />
+      <img src="screenshots/7-schedule.png" alt="Weekly class schedule with time slots" loading="lazy" />
+      <img src="screenshots/8-pricing.png" alt="Package pricing setup" loading="lazy" />
+      <img src="screenshots/9-works-offline.png" alt="Works offline — syncs when you're back online" loading="lazy" />
+    </div>
+    <p class="shots-hint">Swipe to see more →</p>
+  </div>
 
   <div class="section">
     <h2>What It Does</h2>
