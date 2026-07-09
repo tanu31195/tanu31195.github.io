@@ -3,156 +3,232 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CoachDesk HQ – Gym Management App</title>
+  <title>CoachDesk HQ – The Gym Coach's Back Office</title>
+  <meta name="description" content="Run your whole gym from your phone — even with no internet. Members, attendance, payments, reminders. Free on the App Store." />
+  <meta property="og:title" content="CoachDesk HQ – The Gym Coach's Back Office" />
+  <meta property="og:description" content="Members, attendance, payments, reminders — works offline. Free on iOS." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet" />
   <style>
+    /* "Electric volt on graphite" — mirrors the app palette (constants/colors.ts).
+       Contrast rules: volt (#C8F029) is a fill or dark-mode text; never white text on volt. */
+    :root {
+      --volt: #C8F029;
+      --volt-dim: #B5E620;
+      --olive: #55700C;
+      --ink-on-volt: #1A2305;
+      --graphite-950: #0B0C09;
+      --graphite-900: #121410;
+      --graphite-800: #1F211C;
+      --graphite-700: #383B33;
+      --text-body: #C5C9BF;
+      --text-muted: #999E93;
+      --text-bright: #F7F8F5;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #F8FAFC;
-      color: #0F172A;
+      background: var(--graphite-950);
+      color: var(--text-body);
       line-height: 1.6;
     }
-    a { color: #4F46E5; text-decoration: none; }
+    .display {
+      font-family: "Saira Condensed", -apple-system, sans-serif;
+      text-transform: uppercase;
+    }
+    a { color: var(--volt); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     header {
-      background: #4F46E5;
-      color: #fff;
-      padding: 60px 24px 48px;
+      background: linear-gradient(160deg, var(--graphite-900) 0%, var(--graphite-950) 70%);
+      padding: 72px 24px 56px;
       text-align: center;
+      border-bottom: 1px solid var(--graphite-800);
     }
-    .logo {
-      width: 72px; height: 72px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 20px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      font-size: 36px;
-    }
-    header h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
-    header p { font-size: 1.05rem; opacity: 0.85; }
-
-    main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 48px 24px;
-    }
-
-    .section { margin-bottom: 40px; }
-    .section h2 {
-      font-size: 1.2rem;
+    .overline {
+      font-family: "Saira Condensed", sans-serif;
       font-weight: 700;
-      color: #4F46E5;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      font-size: 0.85rem;
+      color: var(--volt);
       margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #E0E7FF;
     }
-    .section p { color: #475569; margin-bottom: 10px; }
+    header h1 {
+      font-family: "Saira Condensed", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: clamp(2.6rem, 8vw, 4rem);
+      line-height: 1;
+      color: var(--text-bright);
+      margin-bottom: 16px;
+    }
+    header .tagline {
+      font-size: 1.1rem;
+      color: var(--text-body);
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+    header .tagline strong { color: var(--text-bright); font-weight: 600; }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .btn-volt {
+      display: inline-block;
+      background: var(--volt);
+      color: var(--ink-on-volt);
+      font-family: "Saira Condensed", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 1.05rem;
+      padding: 14px 32px;
+      border-radius: 12px;
+    }
+    .btn-volt:hover { background: var(--volt-dim); text-decoration: none; }
+    .btn-ghost {
+      display: inline-block;
+      border: 1px solid var(--graphite-700);
+      color: var(--text-bright);
+      font-family: "Saira Condensed", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 1.05rem;
+      padding: 13px 28px;
+      border-radius: 12px;
+    }
+    .btn-ghost:hover { border-color: var(--volt); text-decoration: none; }
+    .hero-note { font-size: 0.85rem; color: var(--text-muted); }
+
+    main { max-width: 760px; margin: 0 auto; padding: 56px 24px; }
+    .section { margin-bottom: 56px; }
+    .section h2 {
+      font-family: "Saira Condensed", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 1rem;
+      color: var(--volt);
+      margin-bottom: 20px;
+    }
+    .section > p { margin-bottom: 10px; }
 
     .features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-top: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
     }
     .feature-card {
-      background: #fff;
-      border: 1px solid #E2E8F0;
-      border-radius: 12px;
+      background: var(--graphite-900);
+      border: 1px solid var(--graphite-800);
+      border-radius: 14px;
       padding: 20px;
     }
-    .feature-card .icon { font-size: 24px; margin-bottom: 8px; }
-    .feature-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
-    .feature-card p { font-size: 0.85rem; color: #64748B; margin: 0; }
+    .feature-card .icon { font-size: 22px; margin-bottom: 10px; }
+    .feature-card h3 {
+      font-family: "Saira Condensed", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 1rem;
+      color: var(--text-bright);
+      margin-bottom: 4px;
+    }
+    .feature-card p { font-size: 0.87rem; color: var(--text-muted); margin: 0; }
 
-    .contact-box {
-      background: #EEF2FF;
-      border: 1px solid #C7D2FE;
-      border-radius: 12px;
-      padding: 24px;
+    .band {
+      background: var(--graphite-900);
+      border: 1px solid var(--graphite-800);
+      border-radius: 14px;
+      padding: 28px 24px;
       text-align: center;
     }
-    .contact-box p { color: #3730A3; margin-bottom: 8px; }
-    .contact-box a {
-      display: inline-block;
-      background: #4F46E5;
-      color: #fff;
-      padding: 10px 24px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .contact-box a:hover { background: #4338CA; text-decoration: none; }
+    .band p { margin-bottom: 14px; }
+    .band p strong { color: var(--text-bright); }
 
     footer {
       text-align: center;
-      padding: 32px 24px;
-      color: #94A3B8;
+      padding: 32px 24px 40px;
+      color: var(--text-muted);
       font-size: 0.85rem;
-      border-top: 1px solid #E2E8F0;
+      border-top: 1px solid var(--graphite-800);
     }
-    footer a { color: #94A3B8; }
+    footer a { color: var(--text-muted); }
+    footer a:hover { color: var(--volt); }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">🏋️</div>
+  <div class="overline">The Gym Coach's Back Office</div>
   <h1>CoachDesk HQ</h1>
-  <p>Simple gym management for coaches and trainers</p>
+  <p class="tagline">Run your whole gym from your phone — <strong>even with no internet</strong>. Members, attendance, payments, reminders. No laptop, no spreadsheet, no per-member fees.</p>
+  <div class="cta-row">
+    <a class="btn-volt" href="https://apps.apple.com/us/app/coachdesk-hq-gym-manager/id6761045494">Download on the App Store</a>
+    <a class="btn-ghost" href="https://www.instagram.com/coachdeskhq">Instagram</a>
+  </div>
+  <p class="hero-note">Free up to 10 members · iPhone &amp; iPad · English, Deutsch, Español, Português</p>
 </header>
 
 <main>
 
   <div class="section">
-    <h2>About CoachDesk</h2>
-    <p>CoachDesk is a mobile app designed for gym owners, personal trainers, and fitness coaches to manage their members, track attendance, handle memberships, and stay on top of payments — all from their phone.</p>
-  </div>
-
-  <div class="section">
-    <h2>Features</h2>
+    <h2>What It Does</h2>
     <div class="features">
       <div class="feature-card">
-        <div class="icon">👥</div>
-        <h3>Member Management</h3>
-        <p>Add, edit, and view all your gym members in one place.</p>
-      </div>
-      <div class="feature-card">
         <div class="icon">✅</div>
-        <h3>Attendance Tracking</h3>
-        <p>Mark daily attendance with one tap. View session history per member.</p>
+        <h3>Mark Who Showed Up</h3>
+        <p>One tap per member. Session counts and balances update themselves.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">📦</div>
-        <h3>Memberships & Packages</h3>
-        <p>Create packages with session limits or unlimited access.</p>
+        <div class="icon">💸</div>
+        <h3>Know Who Owes You</h3>
+        <p>Every outstanding balance at a glance — stop losing revenue to unpaid sessions.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">💳</div>
-        <h3>Payment Tracking</h3>
-        <p>Log payments and track outstanding balances easily.</p>
+        <div class="icon">📲</div>
+        <h3>Chase It in One Tap</h3>
+        <p>Pre-written payment reminders sent through your own WhatsApp or SMS.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">🗓️</div>
-        <h3>Schedule Management</h3>
-        <p>Set up class time slots and manage your weekly schedule.</p>
+        <div class="icon">🧾</div>
+        <h3>Real PDF Invoices</h3>
+        <p>Log a payment, share a professional invoice with your gym's name on it.</p>
       </div>
       <div class="feature-card">
-        <div class="icon">☁️</div>
-        <h3>Cloud Sync</h3>
-        <p>Your data syncs securely across devices automatically.</p>
+        <div class="icon">📶</div>
+        <h3>Works Offline</h3>
+        <p>Everything lives on your phone and syncs when you're back online. Basement gyms welcome.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📊</div>
+        <h3>See Your Business Grow</h3>
+        <p>Revenue and attendance trends from data you already logged.</p>
       </div>
     </div>
   </div>
 
   <div class="section">
+    <h2>On Android?</h2>
+    <div class="band">
+      <p>CoachDesk HQ is iOS-only for now. <strong>Join the Android waitlist</strong> and you'll hear the day it ships.</p>
+      <a class="btn-volt" href="mailto:tanushkabandara@gmail.com?subject=Android%20waitlist%20%E2%80%94%20CoachDesk%20HQ&body=Add%20me%20to%20the%20Android%20waitlist.">Join the Waitlist</a>
+    </div>
+  </div>
+
+  <div class="section">
     <h2>Support</h2>
-    <p>Having trouble or have a question? We're here to help.</p>
-    <div class="contact-box">
-      <p>Reach out and we'll get back to you as soon as possible.</p>
-      <a href="mailto:tanushkabandara@gmail.com">Contact Support</a>
+    <div class="band">
+      <p>Having trouble or have a question? Reach out and we'll get back to you as soon as possible.</p>
+      <a class="btn-ghost" href="mailto:tanushkabandara@gmail.com">Contact Support</a>
     </div>
   </div>
 
@@ -164,7 +240,7 @@
 </main>
 
 <footer>
-  <p>&copy; 2026 CoachDesk HQ. All rights reserved. &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a></p>
+  <p>&copy; 2026 CoachDesk HQ. All rights reserved. &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://www.instagram.com/coachdeskhq">@coachdeskhq</a></p>
 </footer>
 
 </body>

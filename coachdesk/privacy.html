@@ -4,24 +4,55 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Privacy Policy – CoachDesk HQ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet" />
   <style>
+    /* Volt-on-graphite brand (mirrors the app palette). Volt as text on light
+       surfaces uses olive #55700C per the app's contrast rules. */
+    :root {
+      --volt: #C8F029;
+      --olive: #55700C;
+      --graphite-950: #0B0C09;
+      --graphite-900: #121410;
+      --graphite-800: #1F211C;
+      --paper: #F7F8F5;
+      --paper-2: #EDEFE9;
+      --line: #DFE2DA;
+      --text-strong: #1F211C;
+      --text-body: #50544B;
+      --text-muted: #999E93;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #F8FAFC;
-      color: #0F172A;
+      background: var(--paper);
+      color: var(--text-strong);
       line-height: 1.7;
     }
-    a { color: #4F46E5; }
+    a { color: var(--olive); }
 
     header {
-      background: #4F46E5;
-      color: #fff;
+      background: var(--graphite-950);
       padding: 40px 24px 32px;
       text-align: center;
     }
-    header h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 4px; }
-    header p { opacity: 0.8; font-size: 0.9rem; }
+    header h1 {
+      font-family: "Saira Condensed", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      color: #F7F8F5;
+      margin-bottom: 4px;
+    }
+    header p {
+      font-family: "Saira Condensed", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--volt);
+      font-size: 0.85rem;
+    }
 
     main {
       max-width: 720px;
@@ -30,33 +61,36 @@
     }
 
     .updated {
-      background: #EEF2FF;
-      border-left: 4px solid #4F46E5;
+      background: var(--paper-2);
+      border-left: 4px solid var(--volt);
       padding: 10px 16px;
       border-radius: 4px;
       font-size: 0.85rem;
-      color: #3730A3;
+      color: var(--text-body);
       margin-bottom: 36px;
     }
 
     h2 {
-      font-size: 1.1rem;
+      font-family: "Saira Condensed", sans-serif;
       font-weight: 700;
-      color: #1E293B;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 1.1rem;
+      color: var(--text-strong);
       margin: 32px 0 10px;
     }
-    p { color: #475569; margin-bottom: 12px; }
-    ul { color: #475569; padding-left: 20px; margin-bottom: 12px; }
+    p { color: var(--text-body); margin-bottom: 12px; }
+    ul { color: var(--text-body); padding-left: 20px; margin-bottom: 12px; }
     ul li { margin-bottom: 6px; }
 
     footer {
       text-align: center;
       padding: 32px 24px;
-      color: #94A3B8;
+      color: var(--text-muted);
       font-size: 0.85rem;
-      border-top: 1px solid #E2E8F0;
+      border-top: 1px solid var(--line);
     }
-    footer a { color: #94A3B8; }
+    footer a { color: var(--text-muted); }
   </style>
 </head>
 <body>
@@ -68,7 +102,7 @@
 
 <main>
 
-  <div class="updated">Last updated: March 2026</div>
+  <div class="updated">Last updated: July 2026</div>
 
   <p>This Privacy Policy explains how CoachDesk HQ ("we", "our", or "us") collects, uses, and protects information when you use the CoachDesk HQ mobile application.</p>
 
@@ -78,6 +112,8 @@
     <li><strong>Account information:</strong> Your email address and password (stored securely via Supabase authentication)</li>
     <li><strong>Gym data:</strong> Member details, attendance records, membership packages, and payment information that you manually enter into the app</li>
     <li><strong>Gym name:</strong> Provided during account registration</li>
+    <li><strong>Purchase information:</strong> If you subscribe to a paid plan, your subscription status and purchase history are processed via Apple's In-App Purchase system and RevenueCat. We never see or store your payment card details — those are handled by Apple.</li>
+    <li><strong>Crash and diagnostic data:</strong> If the app crashes or encounters an error, technical information (device model, OS version, app version, error details) is sent to Sentry so we can fix the problem. This is not used to identify you.</li>
   </ul>
 
   <h2>2. How We Use Your Information</h2>
@@ -101,22 +137,27 @@
   <p>We do not sell, trade, or share your personal information with third parties, except:</p>
   <ul>
     <li><strong>Supabase:</strong> Our database and authentication provider, used solely to operate the app</li>
+    <li><strong>RevenueCat:</strong> Our subscription management provider, which processes your subscription status using an anonymous account identifier</li>
+    <li><strong>Sentry:</strong> Our crash reporting provider, which receives technical diagnostic data when errors occur</li>
     <li><strong>Legal requirements:</strong> If required by law or to protect our legal rights</li>
   </ul>
 
-  <h2>5. Member Data You Enter</h2>
+  <h2>5. Face ID / Biometric Authentication</h2>
+  <p>CoachDesk HQ can optionally use Face ID or Touch ID to lock the app. Biometric authentication is performed entirely on your device by iOS — we never receive, collect, or store your biometric data.</p>
+
+  <h2>6. Member Data You Enter</h2>
   <p>CoachDesk HQ allows you to store information about your gym members (names, contact details, attendance, payments). You are responsible for ensuring you have the appropriate consent from your members to store their information in the app.</p>
 
-  <h2>6. Data Retention</h2>
+  <h2>7. Data Retention</h2>
   <p>Your data is retained for as long as your account is active. You may request deletion of your account and all associated data by contacting us at the email below.</p>
 
-  <h2>7. Children's Privacy</h2>
+  <h2>8. Children's Privacy</h2>
   <p>CoachDesk HQ is not directed at children under 13. We do not knowingly collect personal information from children under 13.</p>
 
-  <h2>8. Changes to This Policy</h2>
+  <h2>9. Changes to This Policy</h2>
   <p>We may update this Privacy Policy from time to time. We will notify you of significant changes by updating the date at the top of this page. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
 
-  <h2>9. Contact Us</h2>
+  <h2>10. Contact Us</h2>
   <p>If you have any questions about this Privacy Policy or your data, please contact us:</p>
   <p><strong>Email:</strong> <a href="mailto:tanushkabandara@gmail.com">tanushkabandara@gmail.com</a></p>
 
